@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.registryNewStatementController = exports.registryNewStatement = void 0;
+const RedisService_1 = require("./../../services/RedisService");
+const StatementRepository_1 = require("./../../repositories/MongoDB/StatementRepository");
+const RegistryNewStatementController_1 = require("./RegistryNewStatementController");
+const RegistryNewStatement_1 = require("./RegistryNewStatement");
+const statementRepository = new StatementRepository_1.StatementRepository();
+const redisService = new RedisService_1.RedisService();
+const registryNewStatement = new RegistryNewStatement_1.RegistryNewStatement(statementRepository, redisService);
+exports.registryNewStatement = registryNewStatement;
+const registryNewStatementController = new RegistryNewStatementController_1.RegistryNewStatementController(registryNewStatement);
+exports.registryNewStatementController = registryNewStatementController;

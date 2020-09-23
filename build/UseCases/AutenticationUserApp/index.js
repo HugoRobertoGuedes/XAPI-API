@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.autenticacaoUserAppController = exports.autenticationUserApp = void 0;
+const StatementRepository_1 = require("./../../repositories/MongoDB/StatementRepository");
+const RedisService_1 = require("./../../services/RedisService");
+const AuthRepository_1 = require("../../repositories/MongoDB/AuthRepository");
+const AutenticationUserApp_1 = require("./AutenticationUserApp");
+const AutenticationUserAppController_1 = require("./AutenticationUserAppController");
+const redisService = new RedisService_1.RedisService();
+const mongoAuthRepository = new AuthRepository_1.AuthRepository();
+const statementRepository = new StatementRepository_1.StatementRepository();
+const autenticationUserApp = new AutenticationUserApp_1.AutenticationUserApp(mongoAuthRepository, redisService, statementRepository);
+exports.autenticationUserApp = autenticationUserApp;
+const autenticacaoUserAppController = new AutenticationUserAppController_1.AutenticationUserAppController(autenticationUserApp);
+exports.autenticacaoUserAppController = autenticacaoUserAppController;

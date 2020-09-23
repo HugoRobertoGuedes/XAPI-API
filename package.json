@@ -1,0 +1,41 @@
+{
+  "name": "XAPI-API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/HugoRobertoGuedes/XAPI-API.git",
+  "author": "Hugo Guedes <hugoguedesr@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.7",
+    "@types/ioredis": "^4.17.4",
+    "async-redis": "^1.1.7",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "ioredis": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.2",
+    "redis": "^3.0.2",
+    "sha256": "^0.2.0",
+    "ts-node-dev": "^1.0.0-pre.62",
+    "tsconfig": "^7.0.0",
+    "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/dotenv": "^8.2.0",
+    "@types/dotenv-safe": "^8.1.1",
+    "@types/express": "^4.17.7",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mongodb": "^3.5.27",
+    "@types/node": "^14.6.3",
+    "@types/redis": "^2.8.27",
+    "@types/sha256": "^0.2.0"
+  }
+}
