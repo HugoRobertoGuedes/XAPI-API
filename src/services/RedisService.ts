@@ -12,7 +12,6 @@ export class RedisService {
     let port: string = REDIS_PORT
     let host: string = REDIS_HOST
     this.client = new Redis(port, host);
-    console.log(this.client)
   }
 
   async SaveTokenAutenticateApp(

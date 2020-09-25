@@ -9,11 +9,8 @@ export class RegistryNewStatement {
   ) {}
 
   async execulte(state: StatementDto, token: string): Promise<object> {
-    // Valid Auth
+    // Cache redis
     let _KeyRedis = await this._redisService.GetValueToken(token);
-    if (_KeyRedis == null) {
-      throw new Error("You are not authorized to perform this action");
-    }
 
     // Valid Statement
     await this.ValidStatement(state);
@@ -26,7 +23,7 @@ export class RegistryNewStatement {
     newStatement["App_Id"] = _KeyRedis["tokenApp"];
 
     // Insert Registry in database
-    const insertedStatement = await this._stateRepository.InserirNovoStatement(
+    const insertedStatement = await this._stateRepository.InsertNewStatement(
       _KeyRedis["dbName"],
       newStatement
     );

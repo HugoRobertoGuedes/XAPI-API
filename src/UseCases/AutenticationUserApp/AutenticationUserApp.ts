@@ -31,7 +31,7 @@ export class AutenticationUserApp {
         const token = jwt.sign({ tokenApp }, process.env.SECRET_KEY, {
           expiresIn: "2h",
         });
-        let dbName: string = await this._stateRepo.ObterNomeDatabasePorEntidadeId(
+        let dbName: string = await this._stateRepo.GetDatabaseNameByEntityId(
           app.Entidade_Id
         );
         await this._redisService.SaveTokenAutenticateUserApp(

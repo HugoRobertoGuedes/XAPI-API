@@ -1,6 +1,7 @@
-import { registryNewStatementController } from './../../UseCases/RegistryNewStatement/';
+import { registryNewStatementController } from "./../../UseCases/RegistryNewStatement/";
 import { Router } from "express";
-import { ValidateToken } from '../../middlewares/AutenticateRequests';
+import { ValidateToken } from "../../middlewares/AutenticateRequests";
+import { searchStatementController } from "../../UseCases/SearchStatement";
 
 const StatementRoute = Router();
 
@@ -15,5 +16,11 @@ StatementRoute.post("/statement", ValidateToken, (req, res, next) => {
   return registryNewStatementController.handler(req, res);
 });
 
+/**
+ * Search Statements for object filter
+ */
+StatementRoute.get("/statement", ValidateToken, (req, res, next) => {
+  return searchStatementController.handler(req, res);
+});
 
 export { StatementRoute };

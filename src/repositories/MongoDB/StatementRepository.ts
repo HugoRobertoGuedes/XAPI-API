@@ -8,7 +8,7 @@ import { URI } from "../../helpers/MongoConnection";
 export class StatementRepository implements IStatementRepository {
   constructor() {}
 
-  async InserirNovoStatement(db: string, statement: Object): Promise<Object> {
+  async InsertNewStatement(db: string, statement: Object): Promise<Object> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
@@ -23,7 +23,7 @@ export class StatementRepository implements IStatementRepository {
     }
   }
 
-  async BuscarStatementPorFiltro(db: string, filter: Object): Promise<Object> {
+  async SearchStatement(db: string, filter: Object): Promise<Object[]> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
@@ -43,7 +43,7 @@ export class StatementRepository implements IStatementRepository {
     }
   }
 
-  async BuscarAppPorTokenApp(token: string): Promise<Aplicacao> {
+  async SearchAppByTokenApp(token: string): Promise<Aplicacao> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
@@ -67,13 +67,13 @@ export class StatementRepository implements IStatementRepository {
     }
   }
 
-  async ObterNomeDatabasePorEntidadeId(id: ObjectID): Promise<string> {
+  async GetDatabaseNameByEntityId(id: ObjectID): Promise<string> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
       let db: string;
       const database = client.db("Xapi_Admin");
-      let collection = database.collection("Entidades");
+      let collection = database.collection("Entities");
 
       let query = {
         _id: id,

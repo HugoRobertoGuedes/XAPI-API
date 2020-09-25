@@ -21,4 +21,10 @@ export = {
 
   // Keys
   SECRECT_APP_KEY: process.env.SECRET_KEY,
+
+  // Roles Routes
+  ROUTE_RULES: {
+    APP: ["/statement"],
+    LRS: ["/entity"],
+  },
 };
