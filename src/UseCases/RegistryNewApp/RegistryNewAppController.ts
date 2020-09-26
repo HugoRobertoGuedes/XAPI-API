@@ -1,17 +1,17 @@
-import { SearchEntity } from "./SearchEntity";
+import { RegistryNewApp } from "./RegistryNewApp";
 import { Response, Request } from "express";
 
-export class SearchEntityCOntroller {
-  constructor(private _searchEntity: SearchEntity) {}
+export class RegistryNewAppController {
+  constructor(private _registryNewApp: RegistryNewApp) {}
 
   async handler(request: Request, response: Response): Promise<Response> {
-    const filter = request.body;
+    const form = request.body;
     try {
-      const listEntities = await this._searchEntity.execulte(filter);
+      const app = await this._registryNewApp.execulte(form);
       return response.status(200).send({
-        Message: "Statements",
+        Message: "Aplication",
         Ok: true,
-        Obj: listEntities,
+        Obj: app,
       });
     } catch (error) {
       return response.status(401).send({

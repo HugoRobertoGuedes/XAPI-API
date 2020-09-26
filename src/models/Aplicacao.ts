@@ -2,7 +2,7 @@ import { Auth } from "./Auth";
 import { ObjectID } from "mongodb";
 
 export class Aplicacao {
-  public readonly _id: ObjectID;
+  public readonly _id?: ObjectID;
   public Titulo: string;
   public Descricao: string;
   public Entidade_Id: ObjectID;

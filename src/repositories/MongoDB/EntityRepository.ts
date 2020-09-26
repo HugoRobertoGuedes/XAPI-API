@@ -1,31 +1,28 @@
 import { URI } from "./../../helpers/MongoConnection";
-import { ObjectID, MongoClient } from "mongodb";
+import { MongoClient } from "mongodb";
 import { Entity } from "../../models/Entity";
 import { IEntityRepository } from "../IEntityRepository";
 
 export class EntityRepository implements IEntityRepository{
   constructor() {}
 
-  async FindEntityFilter(filter: object): Promise<Entity> {
+  async FindEntityFilter(filter: object): Promise<Entity[]> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
-    let entity: Entity;
+    let entity: Entity[] = [];
     try {
       const db = client.db("Xapi_Admin");
       let collection = db.collection("Entities");
 
       // Query
       var query = filter;
-
-      // Request
+      // Request  
       const cursor = await collection.find(query);
-
       // Return
       await cursor.forEach((el) => {
-        entity = el;
+        entity.push(el);
       });
       return entity;
-      return;
     } catch (error) {
       throw new Error(error);
     } finally {

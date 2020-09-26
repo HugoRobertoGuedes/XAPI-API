@@ -31,7 +31,6 @@ export class RegistryNewEntity {
   }
 
   async IsValid(entity: EntityDto): Promise<void> {
-    let compEntity: Entity;
     // Valid Email
     if (
       !EmailRegex.test(entity.Email) ||

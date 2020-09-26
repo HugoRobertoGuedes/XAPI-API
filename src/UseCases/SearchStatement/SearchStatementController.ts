@@ -15,9 +15,8 @@ export class SearchStatementController {
         Obj: statements,
       });
     } catch (error) {
-      console.log(error)
       return response.status(401).send({
-        Message: error,
+        Message: error.message,
         Ok: false,
         Obj: {},
       });

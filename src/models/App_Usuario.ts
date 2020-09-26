@@ -2,10 +2,10 @@ import { ObjectID } from "mongodb";
 import { Auth } from "./Auth";
 
 export class App_Usuario {
-  public readonly _id: ObjectID;
+  public readonly _id?: ObjectID;
   public Nome: string;
   public Email: string;
-  public Documento: ObjectID;
+  public Documento: string;
   public Aplicacoes_Cadastradas: string[];
   public Auth_Usuario: Auth;
   public Dt_Create: Date;

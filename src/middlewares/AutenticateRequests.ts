@@ -26,9 +26,12 @@ const ValidateToken = async (req: Request, res: Response, next) => {
 
   // Redis key exists?
   if (_KeyRedis == null) {
-    throw new Error("You are not authorized to perform this action");
+    return res.status(500).send({
+      Message: "You are not authorized to perform this action",
+      auth: false,
+    });
   }
-
+  
   // Is valid?
   jwt.verify(token, process.env.SECRET_KEY, async function (err, decoded) {
     if (err) {
@@ -37,7 +40,7 @@ const ValidateToken = async (req: Request, res: Response, next) => {
         .send({ Message: "Failed to authenticate", auth: false });
     }
     // This rule is valid endpoint
-    if (ROUTE_RULES[rule].indexOf(route) != 0) {
+    if (ROUTE_RULES[rule].indexOf(route) === -1) {
       return res.status(500).send({
         Message: "You are not authorized to perform this action",
         auth: false,

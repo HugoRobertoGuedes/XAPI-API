@@ -25,6 +25,6 @@ export = {
   // Roles Routes
   ROUTE_RULES: {
     APP: ["/statement"],
-    LRS: ["/entity"],
+    LRS: ["/entity", "/app", "/app/user"],
   },
 };

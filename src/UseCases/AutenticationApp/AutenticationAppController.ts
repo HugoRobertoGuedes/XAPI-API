@@ -18,9 +18,10 @@ export class AutenticationAppController {
         result,
       });
     } catch (err) {
-      console.log(err.message);
-      return response.status(400).send({
-        Error: err.message,
+      return response.status(401).send({
+        Message: err.message,
+        Ok: false,
+        Obj: {},
       });
     }
   }
