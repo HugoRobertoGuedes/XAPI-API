@@ -7,14 +7,14 @@ export class AutenticationUserAppController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { user, pass, tokenApp } = request.body;
     try {
-      const result = await this._autenticationUserAppService.execulte(
+      const Obj = await this._autenticationUserAppService.execulte(
         { user, pass },
         tokenApp
       );
       return response.status(200).send({
         Ok: true,
         Message: "Authenticated application valid for 2 hours",
-        result,
+        Obj,
       });
     } catch (err) {
       return response.status(401).send({

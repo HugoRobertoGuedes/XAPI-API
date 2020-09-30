@@ -1,4 +1,4 @@
-import { EntityDto } from "./../../models/EntityDTO";
+import { EntityDto } from "../../models/DTO/EntityDTO";
 import { Entity } from "./../../models/Entity";
 import { IEntityRepository } from "../../repositories/IEntityRepository";
 

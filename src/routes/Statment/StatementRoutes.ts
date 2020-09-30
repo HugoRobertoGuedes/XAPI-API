@@ -12,14 +12,18 @@ const StatementRoute = Router();
 /**
  * Autentication for aplication acess enpoints to API
  */
-StatementRoute.post("/statement", ValidateToken, (req, res, next) => {
+StatementRoute.post("/statement", (req, res, next) => {
+  ValidateToken(req,res,next,'/statement')
+}, (req,res)=>{
   return registryNewStatementController.handler(req, res);
 });
 
 /**
  * Search Statements for object filter
  */
-StatementRoute.get("/statement", ValidateToken, (req, res, next) => {
+StatementRoute.get("/statement", (req, res, next) => {
+  ValidateToken(req,res,next,'/statement')
+}, (req,res)=>{
   return searchStatementController.handler(req, res);
 });
 

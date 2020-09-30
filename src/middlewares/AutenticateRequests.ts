@@ -1,13 +1,14 @@
 import { RedisService } from "./../services/RedisService";
 import { Request, Response } from "express";
 import { BearerTokenHeader } from "../helpers/String";
+const  url = require('url');
 const { ROUTE_RULES } = require("./../config");
 
 require("dotenv").config();
 
 var jwt = require("jsonwebtoken");
 
-const ValidateToken = async (req: Request, res: Response, next) => {
+const ValidateToken = async (req: Request, res: Response, next, path: string) => {
   const _redisService = new RedisService();
 
   // Get bearer token
@@ -15,7 +16,7 @@ const ValidateToken = async (req: Request, res: Response, next) => {
   // Valid Auth
   let _KeyRedis = await _redisService.GetValueToken(token);
   // Get route is request
-  let route = req.path;
+  let route = path;
   // Get rules
   let rule = _KeyRedis["rule"];
 

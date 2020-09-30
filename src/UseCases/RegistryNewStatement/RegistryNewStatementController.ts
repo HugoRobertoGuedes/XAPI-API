@@ -1,4 +1,4 @@
-import { StatementDto } from "./../../models/StatementDTO";
+import { StatementDto } from "../../models/DTO/StatementDTO";
 import { Request, Response } from "express";
 import { BearerTokenHeader } from "../../helpers/String";
 import { RegistryNewStatement } from "./RegistryNewStatement";

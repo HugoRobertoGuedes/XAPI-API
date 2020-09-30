@@ -1,4 +1,4 @@
-import { EntityDto } from "./../../models/EntityDTO";
+import { EntityDto } from "../../models/DTO/EntityDTO";
 import { Response, Request } from "express";
 import { RegistryNewEntity } from "./RegistryNewEntity.ts";
 export class RegistryNewEntityController {

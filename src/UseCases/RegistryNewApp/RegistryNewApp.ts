@@ -1,7 +1,7 @@
 import { IAppRepository } from './../../repositories/IAppRepository';
 import { ObjectID } from "mongodb";
 import { IEntityRepository } from "./../../repositories/IEntityRepository";
-import { AplicacaoDto } from "./../../models/AplicacaoDto";
+import { AplicacaoDto } from "../../models/DTO/AplicacaoDto";
 import { Aplicacao } from "./../../models/Aplicacao";
 import { encrypt } from "../../helpers/Security";
 import sha256 from "sha256";

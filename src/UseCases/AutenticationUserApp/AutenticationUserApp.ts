@@ -41,17 +41,15 @@ export class AutenticationUserApp {
           user_app.Auth_Usuario
         );
         return {
-          Obj: {
-            Nome: user_app.Nome,
-            Documento: user_app.Documento,
-            Email: user_app.Email,
-            Aplicacao: {
-              Titulo: app.Titulo,
-              Descricao: app.Descricao,
-              Status: app.Status,
-              Dt_Criacao: app.Dt_Create,
-              Token_App: app.Token_App,
-            },
+          Nome: user_app.Nome,
+          Documento: user_app.Documento,
+          Email: user_app.Email,
+          Aplicacao: {
+            Titulo: app.Titulo,
+            Descricao: app.Descricao,
+            Status: app.Status,
+            Dt_Criacao: app.Dt_Create,
+            Token_App: app.Token_App,
           },
           Token: token,
         };

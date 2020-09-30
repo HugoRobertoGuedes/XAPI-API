@@ -27,13 +27,11 @@ export class AutenticationApp {
         );
         await this._redisService.SaveTokenAutenticateApp(token, app, dbName);
         return {
-          Obj: {
-            Titulo: app.Titulo,
-            Descricao: app.Descricao,
-            Status: app.Status,
-            Dt_Criacao: app.Dt_Create,
-            Token_App: app.Token_App,
-          },
+          Titulo: app.Titulo,
+          Descricao: app.Descricao,
+          Status: app.Status,
+          Dt_Criacao: app.Dt_Create,
+          Token_App: app.Token_App,
           Token: token,
         };
       } else {

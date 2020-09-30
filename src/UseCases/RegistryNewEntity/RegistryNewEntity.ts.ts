@@ -1,5 +1,5 @@
 import { Entity } from "./../../models/Entity";
-import { EntityDto } from "../../models/EntityDTO";
+import { EntityDto } from "../../models/DTO/EntityDTO";
 import { CpfRegex, EmailRegex } from "../../helpers/String";
 import { IEntityRepository } from "../../repositories/IEntityRepository";
 

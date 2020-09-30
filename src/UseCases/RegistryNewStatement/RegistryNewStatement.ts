@@ -1,5 +1,5 @@
 import { RedisService } from "./../../services/RedisService";
-import { StatementDto } from "./../../models/StatementDTO";
+import { StatementDto } from "../../models/DTO/StatementDTO";
 import { IStatementRepository } from "./../../repositories/IStatementRepository";
 
 export class RegistryNewStatement {

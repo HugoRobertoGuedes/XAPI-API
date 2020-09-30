@@ -1,5 +1,5 @@
 import { ObjectID } from "mongodb";
-import { AplicacaoDto } from "./../../models/AplicacaoDto";
+import { AplicacaoDto } from "../../models/DTO/AplicacaoDto";
 import { IAppRepository } from "./../../repositories/IAppRepository";
 import { Aplicacao } from "./../../models/Aplicacao";
 import { app } from "../../app";

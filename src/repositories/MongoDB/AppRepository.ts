@@ -1,10 +1,10 @@
-import { App_Usuario } from './../../models/App_Usuario';
+import { App_Usuario } from "./../../models/App_Usuario";
 import { Aplicacao } from "../../models/Aplicacao";
 import { MongoClient } from "mongodb";
 import { URI } from "./../../helpers/MongoConnection";
 import { IAppRepository } from "../IAppRepository";
 
-export class AppRepository implements IAppRepository{
+export class AppRepository implements IAppRepository {
   constructor() {}
 
   async SearchApps(filter: Object): Promise<Aplicacao[]> {
@@ -33,6 +33,7 @@ export class AppRepository implements IAppRepository{
       let apps: App_Usuario[] = [];
       const database = client.db("Xapi_Admin");
       let collection = database.collection("App_Usuarios");
+      console.log(filter)
       const cursor = await collection.find(filter);
       await cursor.forEach((element) => {
         apps.push(element);

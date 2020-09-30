@@ -7,14 +7,14 @@ export class AutenticationLrsController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { user, pass, tokenExpire } = request.body;
-      const ret = await this._autenticarLrs.execulte(
+      const Obj = await this._autenticarLrs.execulte(
         { user, pass },
         tokenExpire
       );
       return response.status(200).send({
         Ok: true,
         Message: `Authenticated application valid for ${tokenExpire} ms`,
-        ret,
+        Obj,
       });
     } catch (err) {
       return response.status(401).send({

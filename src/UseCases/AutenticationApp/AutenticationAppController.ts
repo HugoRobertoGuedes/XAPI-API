@@ -9,13 +9,13 @@ export class AutenticationAppController {
   async handle(request: Request, response: Response): Promise<Response> {
     const auth = request.body;
     try {
-      const result = await this._autenticationAppService.execulte(
+      const Obj = await this._autenticationAppService.execulte(
         auth
       );
       return response.status(200).send({
         Ok: true,
         Message: "Authenticated application valid for 2 hours",
-        result,
+        Obj,
       });
     } catch (err) {
       return response.status(401).send({

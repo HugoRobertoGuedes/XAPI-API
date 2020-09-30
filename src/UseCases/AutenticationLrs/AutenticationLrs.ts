@@ -32,9 +32,6 @@ export class AutenticationLrs {
           .normalize("NFD")
           .replace(/[^a-zA-Zs]/g, "");
 
-        // DELETE
-        console.log(_tokenString);
-
         const token = jwt.sign({ _tokenString }, process.env.SECRET_KEY, {
           expiresIn: tokenExpire,
         });
@@ -44,13 +41,11 @@ export class AutenticationLrs {
           tokenExpire
         );
         return {
-          Obj: {
-            NomeCompleto: userLrs.NomeCompleto,
-            NomeUsuario: userLrs.NomeUsuario,
-            Email: userLrs.Email,
-            Telefone: userLrs.Telefone,
-            Tipo: userLrs.Tipo,
-          },
+          NomeCompleto: userLrs.NomeCompleto,
+          NomeUsuario: userLrs.NomeUsuario,
+          Email: userLrs.Email,
+          Telefone: userLrs.Telefone,
+          Tipo: userLrs.Tipo,
           Token: token,
         };
       } else {
