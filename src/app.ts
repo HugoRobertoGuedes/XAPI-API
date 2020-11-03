@@ -15,7 +15,7 @@ const requestIp = require('request-ip');
 
 // App
 const app = express();
-
+app.disable("x-powered-by");
 //
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
