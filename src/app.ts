@@ -10,6 +10,9 @@ import { LrsRoutes } from "./routes/Lrs/LrsRoutes";
 
 require("dotenv").config();
 
+// Imports
+const requestIp = require('request-ip');
+
 // App
 const app = express();
 
@@ -18,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
+app.set('trust proxy', true);
+app.use(requestIp.mw())
 
 /**
  * Routes

@@ -4,7 +4,7 @@ import { AppRepository } from "./../../repositories/MongoDB/AppRepository";
 
 const appRepository = new AppRepository();
 
-const searcUserhApp = new SearchUserApp(appRepository);
-const searchUserAppController = new SearchUserAppController(searcUserhApp);
+const searchUserApp = new SearchUserApp(appRepository);
+const searchUserAppController = new SearchUserAppController(searchUserApp);
 
-export { searcUserhApp, searchUserAppController };
+export { searchUserApp, searchUserAppController };

@@ -1,10 +1,32 @@
 import { URI } from "./../../helpers/MongoConnection";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectID } from "mongodb";
 import { Entity } from "../../models/Entity";
 import { IEntityRepository } from "../IEntityRepository";
 
-export class EntityRepository implements IEntityRepository{
+export class EntityRepository implements IEntityRepository {
   constructor() {}
+
+  async EntityUpdate(id: string, filds_up: Object): Promise<Entity> {
+    const client = new MongoClient(URI, { useUnifiedTopology: true });
+    await client.connect();
+    let updated: Entity;
+    try {
+      const db = client.db("Xapi_Admin");
+      let collection = db.collection("Entities");
+
+      let cursor = await collection.findOneAndUpdate(
+        { _id: new ObjectID(id) },
+        filds_up,
+        { returnOriginal: false }
+      );
+      updated = cursor['value'];
+      return updated;
+    } catch (error) {
+      throw new Error(error);
+    } finally {
+      await client.close();
+    }
+  }
 
   async FindEntityFilter(filter: object): Promise<Entity[]> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
@@ -13,10 +35,9 @@ export class EntityRepository implements IEntityRepository{
     try {
       const db = client.db("Xapi_Admin");
       let collection = db.collection("Entities");
-
       // Query
       var query = filter;
-      // Request  
+      // Request
       const cursor = await collection.find(query);
       // Return
       await cursor.forEach((el) => {

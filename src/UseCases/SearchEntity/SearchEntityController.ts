@@ -5,11 +5,15 @@ export class SearchEntityCOntroller {
   constructor(private _searchEntity: SearchEntity) {}
 
   async handler(request: Request, response: Response): Promise<Response> {
-    const filter = request.body;
     try {
-      const listEntities = await this._searchEntity.execulte(filter);
+      const listEntities = await this._searchEntity.execute({
+        Nome: request.query.nome.toString(),
+        Documento: request.query.documento.toString(),
+        Email: request.query.email.toString(),
+        Telefone: request.query.telefone.toString(),
+      });
       return response.status(200).send({
-        Message: "Statements",
+        Message: "Entities",
         Ok: true,
         Obj: listEntities,
       });

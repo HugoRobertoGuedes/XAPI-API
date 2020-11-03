@@ -7,7 +7,7 @@ export class SearchStatement {
     private _redisService: RedisService
   ) {}
 
-  async execulte(filter: Object, token: string): Promise<Object[]> {
+  async execute(filter: Object, token: string): Promise<Object[]> {
     // Valid Auth
     let _KeyRedis = await this._redisService.GetValueToken(token);
     // Get database

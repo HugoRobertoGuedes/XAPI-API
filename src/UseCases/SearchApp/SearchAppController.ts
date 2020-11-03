@@ -5,13 +5,18 @@ export class SearchAppController {
   constructor(private _searchApp: SearchApp) {}
 
   async handler(request: Request, response: Response): Promise<Response> {
-    const filter = request.body;
+    
+    console.log(request.body)
     try {
-      let apps = await this._searchApp.execulte(filter);
+      let apps = await this._searchApp.execute({Titulo: request.query.Titulo.toString(),
+      Entidade_Id: request.query.Entidade_Id.toString(),
+      Descricao: '',
+      Token_Expire: 0
+    }​​​​​​​);
       return response.status(200).send({
         Message: "Aplications",
         Ok: true,
-        obj: apps,
+        Obj: apps,
       });
     } catch (err) {
       return response.status(401).send({

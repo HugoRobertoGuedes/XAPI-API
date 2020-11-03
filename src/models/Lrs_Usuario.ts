@@ -1,6 +1,6 @@
 import { ObjectID } from "mongodb";
 export class Lrs_Usuario {
-  public readonly _id: ObjectID;
+  public readonly _id?: ObjectID;
   public NomeCompleto: string;
   public NomeUsuario: string;
   public SenhaUsuario: string;

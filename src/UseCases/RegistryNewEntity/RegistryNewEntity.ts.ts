@@ -60,7 +60,7 @@ export class RegistryNewEntity {
     if (
       (await this._EntityRepo.FindEntityFilter({
         "Documento": entity.Documento,
-      })) != null
+      })).length !=0
     ) {
       throw new Error("A document already exists");
     }
@@ -68,7 +68,7 @@ export class RegistryNewEntity {
     if (
       (await this._EntityRepo.FindEntityFilter({
         Email: entity.Email,
-      })) != null
+      })).length !=0
     ) {
       throw new Error("A Email already exists");
     }
@@ -77,7 +77,7 @@ export class RegistryNewEntity {
       throw new Error("Enter a valid Nome");
     }
     if (
-      (await this._EntityRepo.FindEntityFilter({ Nome: entity.Nome })) != null
+      (await this._EntityRepo.FindEntityFilter({ Nome: entity.Nome })).length !=0
     ) {
       throw new Error("A Nome already exists");
     }

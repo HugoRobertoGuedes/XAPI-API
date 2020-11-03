@@ -7,9 +7,14 @@ export class AutenticationUserAppController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { user, pass, tokenApp } = request.body;
     try {
+      let ip =
+        request.clientIp ||
+        request.headers["x-forwarded-for"] ||
+        request.connection.remoteAddress;
       const Obj = await this._autenticationUserAppService.execulte(
         { user, pass },
-        tokenApp
+        tokenApp,
+        ip.toString()
       );
       return response.status(200).send({
         Ok: true,

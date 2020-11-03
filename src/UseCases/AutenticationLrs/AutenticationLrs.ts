@@ -1,3 +1,4 @@
+import { encrypt } from "../../helpers/Security";
 import { Auth } from "../../models/Auth";
 import { IAuthRepository } from "../../repositories/IAuthRepository";
 import { RedisService } from "../../services/RedisService";
@@ -10,7 +11,7 @@ export class AutenticationLrs {
     private _redisService: RedisService
   ) {}
 
-  async execulte(auth: Auth, tokenExpire: number): Promise<Object> {
+  async execulte(auth: Auth, tokenExpire: number, ip: string): Promise<Object> {
     try {
       // Validations
       if (auth.pass == null) {
@@ -20,7 +21,10 @@ export class AutenticationLrs {
         throw new Error("User is required!");
       }
       // Find to database
-      let userLrs = await this._authRepo.FindUserlrsByAuth(auth);
+      let userLrs = await this._authRepo.FindUserlrsByAuth({
+        user: auth.user,
+        pass: encrypt(auth.pass)
+      });
 
       // is valid
       if (userLrs != null) {
@@ -37,8 +41,9 @@ export class AutenticationLrs {
         });
         await this._redisService.SaveTokenAutenticateLrs(
           token,
+          ip,
           auth,
-          tokenExpire
+          tokenExpire,
         );
         return {
           NomeCompleto: userLrs.NomeCompleto,
@@ -49,6 +54,9 @@ export class AutenticationLrs {
           Token: token,
         };
       } else {
+        // Save log to ip attempt
+        await this._redisService.SaveIpattemptAuth(ip, new Date(), false);
+        // Error
         throw new Error("User doens't exists");
       }
     } catch (error) {

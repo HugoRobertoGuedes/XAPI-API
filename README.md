@@ -7,13 +7,18 @@ API design to meet E-learning model standards Experience API
 - inform host and port do redis in `.env` file
 
 
+# insominia
+
+- To test the application by `insominia`, use the file in the folder `Rest testing/Insomnia-All.json`
+
+
 # Steps to start app
  1. run comands
 
   ```bash
     yarn install
   ```
- 
+
  2. create `.env` file and inform enviroments
 
 ```env
@@ -44,7 +49,7 @@ SECRET_KEY=
   ```
 
  4. run comand to start
-  
+
   ```bash
     yarn start
   ```

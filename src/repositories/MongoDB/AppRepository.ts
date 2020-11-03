@@ -33,7 +33,6 @@ export class AppRepository implements IAppRepository {
       let apps: App_Usuario[] = [];
       const database = client.db("Xapi_Admin");
       let collection = database.collection("App_Usuarios");
-      console.log(filter)
       const cursor = await collection.find(filter);
       await cursor.forEach((element) => {
         apps.push(element);

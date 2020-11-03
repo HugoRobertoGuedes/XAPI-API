@@ -3,4 +3,6 @@ export interface EntityDto {
   Email: string;
   Telefone: string;
   Documento: string;
+  _id: string;
+  Status: boolean;
 }

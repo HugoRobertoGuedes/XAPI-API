@@ -8,7 +8,7 @@ export class SearchStatementController {
     const filter = request.body;
     const token = BearerTokenHeader(request.headers["authorization"]);
     try {
-      const statements = await this._serachStatement.execulte(filter,token);
+      const statements = await this._serachStatement.execute(filter,token);
       return response.status(200).send({
         Message: "Statements",
         Ok: true,

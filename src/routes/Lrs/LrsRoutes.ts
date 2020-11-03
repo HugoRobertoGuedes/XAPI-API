@@ -7,6 +7,10 @@ import { searchAppController } from "../../UseCases/SearchApp";
 import { registryUserAppController } from "../../UseCases/RegistryUserApp";
 import { searchUserAppController } from "../../UseCases/SearchUserApp";
 import { searchAllUserAppController } from "../../UseCases/SearchAllUserApps";
+import { registryNewUserLrsController } from "../../UseCases/RegistryNewUserLrs";
+import { searchUserLrsController } from "../../UseCases/SearchUserLrs";
+import { updateEntityController } from "../../UseCases/UpdateEntity";
+import { updateUserLrsController } from "../../UseCases/UpdateUserLrs";
 
 const LrsRoutes = Router();
 
@@ -31,6 +35,16 @@ LrsRoutes.get("/entity", (req, res, next) => {
 },(req,res)=> {
   return searchEntityController.handler(req, res);
 });
+
+/**
+ * Update Entity
+ */
+LrsRoutes.post("/entity/update", (req, res, next) => {
+  ValidateToken(req,res,next,'/entity/update')
+},(req,res)=> {
+  return updateEntityController.handler(req, res);
+});
+
 
 /**
  * Registry new App
@@ -75,6 +89,31 @@ LrsRoutes.get("/app/users/all", (req, res, next) => {
   ValidateToken(req,res,next,'/app/users/all')
 },(req,res)=> {
   return searchAllUserAppController.handler(req, res);
+});
+
+/**
+ * New user Lrs
+ */
+LrsRoutes.post("/lrs/user/new", (req, res, next) => {
+  ValidateToken(req,res,next,'/lrs/user/new')
+},(req,res)=> {
+  return registryNewUserLrsController.handler(req, res);
+});
+/**
+ * Search all users from entity
+ */
+LrsRoutes.get("/lrs/users/:id", (req, res, next) => {
+  ValidateToken(req,res,next,'/lrs/users/:id')
+},(req,res)=> {
+  return searchUserLrsController.handler(req, res);
+});
+/**
+ * Update user Lrs
+ */
+LrsRoutes.post("/lrs/users/:id", (req, res, next) => {
+  ValidateToken(req,res,next,'/lrs/users/:id')
+},(req,res)=> {
+  return updateUserLrsController.handler(req, res);
 });
 
 export { LrsRoutes };

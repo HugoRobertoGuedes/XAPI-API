@@ -14,7 +14,7 @@ class RegistryNewStatementController {
             return response.status(200).send({
                 Message: "Succes Register Statement",
                 Ok: true,
-                obj: insertedState,
+                Obj: insertedState,
             });
         }
         catch (err) {

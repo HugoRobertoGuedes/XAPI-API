@@ -4,7 +4,7 @@ import { App_UsuarioDto } from "../../models/DTO/App_UsuarioDto";
 export class SearchUserApp {
   constructor(private _IAppRepo: IAppRepository) {}
 
-  async execulte(id: string): Promise<App_Usuario[]> {
+  async execute(id: string): Promise<App_Usuario[]> {
     if (id == null || id == "") {
       throw new Error("Inform ID app");
     }

@@ -7,7 +7,7 @@ export class SearchUserAppController {
   async handler(request: Request, response: Response): Promise<Response> {
     const id = request.params.id;
     try {
-      const statements = await this._searchUserApp.execulte(id);
+      const statements = await this._searchUserApp.execute(id);
       return response.status(200).send({
         Message: "User Apps",
         Ok: true,

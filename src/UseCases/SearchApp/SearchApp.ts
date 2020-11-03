@@ -6,9 +6,9 @@ import { app } from "../../app";
 
 export class SearchApp {
   constructor(private _iAppRepo: IAppRepository) {}
-  async execulte(filter: AplicacaoDto): Promise<Aplicacao[]> {
-    let $or = ([] = []);
-    if (filter.Titulo != "") {
+  async execute(filter: AplicacaoDto): Promise<Aplicacao[]> {
+    let $or: Object[] = [];
+    if (filter.Titulo != "" && filter.Titulo!= undefined && filter.Titulo!= null) {
       $or.push({
         Titulo:
           filter.Titulo == ""
@@ -16,7 +16,7 @@ export class SearchApp {
             : new RegExp(".*" + filter.Titulo + ".*", "i"),
       });
     }
-    if (filter.Entidade_Id != "") {
+    if (filter.Entidade_Id != "" && filter.Entidade_Id!= undefined  && filter.Entidade_Id!= null) {
       $or.push({
         Entidade_Id:
           filter.Entidade_Id == "" ? "" : new ObjectID(filter.Entidade_Id),

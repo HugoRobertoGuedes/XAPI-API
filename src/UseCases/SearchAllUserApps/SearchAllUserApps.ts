@@ -4,8 +4,8 @@ import { App_UsuarioDto } from "../../models/DTO/App_UsuarioDto";
 export class SearchAllUserApps {
   constructor(private _IAppRepo: IAppRepository) {}
 
-  async execulte(filter: App_UsuarioDto): Promise<App_Usuario[]> {
-    let $or = ([] = []);
+  async execute(filter: App_UsuarioDto): Promise<App_Usuario[]> {
+    let $or: Object[] = [];
     if (filter.Nome != "" && filter.Nome != null) {
       $or.push({
         Nome:
@@ -28,7 +28,7 @@ export class SearchAllUserApps {
     }
     if (
       filter.Aplicacoes_Cadastradas != null &&
-      filter.Aplicacoes_Cadastradas.length > 0 
+      filter.Aplicacoes_Cadastradas.length > 0
     ) {
       $or.push({
         Aplicacoes_Cadastradas:

@@ -11,7 +11,7 @@ export class RegistryUserAppController {
       return response.status(200).send({
         Message: "User Aplication",
         Ok: true,
-        obj: userApps,
+        Obj: userApps,
       });
     } catch (err) {
       return response.status(401).send({

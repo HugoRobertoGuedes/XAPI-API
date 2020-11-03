@@ -25,9 +25,18 @@ export = {
   // Roles Routes
   ROUTE_RULES: {
     APP: ["/statement"],
-    LRS: ["/entity", "/app", "/app/user","/app/:id/users", "/app/users/all"],
+    LRS: ["/entity", "/app", "/app/user","/app/:id/users", "/app/users/all", "/lrs/user/new","/lrs/users/:id", "/entity/update"],
   },
 
+  // Limits
+  MAX_ATTEMPTS: process.env.MAX_ATTEMPTS,
+
+  // Types User
+  TYPE_USER: [
+    "LRS",
+    "ADMIN",
+    "ROOT"
+  ]
   // PT-BR
   // EN-US
 };

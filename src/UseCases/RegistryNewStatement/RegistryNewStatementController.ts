@@ -15,9 +15,9 @@ export class RegistryNewStatementController {
         token
       );
       return response.status(200).send({
-        Message: "Succes Register Statement",
+        Message: "Success Register Statement",
         Ok: true,
-        obj: insertedState,
+        Obj: insertedState,
       });
     } catch (err) {
       return response.status(401).send({

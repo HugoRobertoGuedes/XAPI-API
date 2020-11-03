@@ -14,8 +14,10 @@ export class RegistryUserApp {
     await this.ValidUserApp(userApp);
 
     // Generate Auth
-    let authUser = userApp.Nome.trim().toLowerCase();
-    let randomPass = Math.random().toString(36).substring(16);
+    let authUser = userApp.Nome.toLowerCase()
+      .normalize("NFD")
+      .replace(/[^a-zA-Zs]/g, "");
+    let randomPass = Math.random().toString(36).substring(7);
     let authPass = encrypt(randomPass);
 
     // Generate Model
@@ -34,6 +36,7 @@ export class RegistryUserApp {
       Usuario_Criacao_Id: new ObjectID(userApp.Usuario_Criacao_Id),
     });
     user = await this._iAppRepo.RegistryNewUserApp(user);
+    user.Auth_Usuario.pass = randomPass;
     return user;
   }
 

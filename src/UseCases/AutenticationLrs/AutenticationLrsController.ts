@@ -7,9 +7,14 @@ export class AutenticationLrsController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { user, pass, tokenExpire } = request.body;
+      let ip =
+        request.clientIp ||
+        request.headers["x-forwarded-for"] ||
+        request.connection.remoteAddress;
       const Obj = await this._autenticarLrs.execulte(
         { user, pass },
-        tokenExpire
+        tokenExpire,
+        ip.toString()
       );
       return response.status(200).send({
         Ok: true,
