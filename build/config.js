@@ -18,4 +18,24 @@ module.exports = {
     REDIS_PORT: process.env.REDIS_PORT,
     // Keys
     SECRECT_APP_KEY: process.env.SECRET_KEY,
+    // Roles Routes
+    ROUTE_RULES: {
+        APP: ["/statement"],
+        LRS: [
+            "/entity",
+            "/app",
+            "/app/user",
+            "/app/:id/users",
+            "/app/users/all",
+            "/lrs/user/new",
+            "/lrs/users/:id",
+            "/entity/update",
+            "/lrs/report",
+            "/lrs/report/export",
+        ],
+    },
+    // Limits
+    MAX_ATTEMPTS: process.env.MAX_ATTEMPTS,
+    // Types User
+    TYPE_USER: ["LRS", "ADMIN", "ROOT"],
 };

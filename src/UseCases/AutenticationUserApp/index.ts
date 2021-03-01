@@ -4,7 +4,9 @@ import { AuthRepository } from "../../repositories/MongoDB/AuthRepository";
 import { AutenticationUserApp } from "./AutenticationUserApp";
 import { AutenticationUserAppController } from "./AutenticationUserAppController";
 
-const redisService = new RedisService();
+import { redisCli } from "../../app";
+
+const redisService = new RedisService(redisCli);
 const mongoAuthRepository = new AuthRepository();
 const statementRepository = new StatementRepository();
 

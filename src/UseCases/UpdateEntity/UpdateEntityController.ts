@@ -7,7 +7,7 @@ export class UpdateEntityController {
   async handler(request: Request, response: Response): Promise<Response> {
     const form = request.body;
     try {
-      const updt_entity = await this._UpdateEntity.execulte(form);
+      const updt_entity = await this._UpdateEntity.execute(form);
       return response.status(200).send({
         Message: "Entity updated",
         Ok: true,

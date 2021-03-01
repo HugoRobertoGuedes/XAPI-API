@@ -1,5 +1,5 @@
 import { RedisService } from "./../../services/RedisService";
-import { StatementDto } from "../../models/DTO/StatementDTO";
+import { StatementDTO } from "../../models/DTO/StatementDTO";
 import { IStatementRepository } from "./../../repositories/IStatementRepository";
 
 export class RegistryNewStatement {
@@ -8,7 +8,7 @@ export class RegistryNewStatement {
     private _redisService: RedisService
   ) {}
 
-  async execulte(state: StatementDto, token: string): Promise<object> {
+  async execulte(state: StatementDTO, token: string): Promise<object> {
     // Cache redis
     let _KeyRedis = await this._redisService.GetValueToken(token);
 
@@ -32,7 +32,7 @@ export class RegistryNewStatement {
     return insertedStatement;
   }
 
-  async ValidStatement(state: StatementDto): Promise<void> {
+  async ValidStatement(state: StatementDTO): Promise<void> {
     // Objetos Obrigatórios
     if (state.actor == null) {
       throw new Error("The object {actor} cannot be empty.");

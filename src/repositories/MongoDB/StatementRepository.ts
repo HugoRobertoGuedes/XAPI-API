@@ -2,7 +2,7 @@ const { MongoClient } = require("mongodb");
 
 import { IStatementRepository } from "./../IStatementRepository";
 import { ObjectID } from "mongodb";
-import { Aplicacao } from "../../models/Aplicacao";
+import { Application } from "../../models/Application";
 import { URI } from "../../helpers/MongoConnection";
 
 export class StatementRepository implements IStatementRepository {
@@ -43,13 +43,13 @@ export class StatementRepository implements IStatementRepository {
     }
   }
 
-  async SearchAppByTokenApp(token: string): Promise<Aplicacao> {
+  async SearchAppByTokenApp(token: string): Promise<Application> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
-      let app: Aplicacao;
+      let app: Application;
       const database = client.db("Xapi_Admin");
-      let collection = database.collection("Aplicacoes");
+      let collection = database.collection("Applications");
 
       var query = {
         Token_App: token,

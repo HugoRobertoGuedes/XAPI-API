@@ -1,4 +1,4 @@
-export interface StatementDto {
+export interface StatementDTO {
   _id: string;
   actor: {
     name: string;

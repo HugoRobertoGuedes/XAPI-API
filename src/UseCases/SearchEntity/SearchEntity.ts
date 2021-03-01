@@ -8,27 +8,27 @@ export class SearchEntity {
   async execute(search: EntityDto): Promise<Entity[]> {
     let $or: Object[] = [];
     
-    if (search.Nome != null && search.Nome != "") {
+    if (search.Name != null && search.Name != "") {
       $or.push({
-        Nome: new RegExp(".*" + search.Nome + ".*", "i"),
+        Name: new RegExp(".*" + search.Name + ".*", "i"),
       });
     }
 
-    if (search.Documento != null && search.Documento != "") {
+    if (search.Document != null && search.Document != "") {
       $or.push({
-        Documento: new RegExp(".*" + search.Documento + ".*", "i"),
+        Document: new RegExp(".*" + search.Document + ".*", "i"),
       });
     }
 
-    if (search.Email != null && search.Email != "") {
+    if (search.Mail != null && search.Mail != "") {
       $or.push({
-        Email: new RegExp(".*" + search.Email + ".*", "i"),
+        Mail: new RegExp(".*" + search.Mail + ".*", "i"),
       });
     }
 
-    if (search.Telefone != null && search.Telefone != "") {
+    if (search.Phone != null && search.Phone != "") {
       $or.push({
-        Telefone: new RegExp(".*" + search.Telefone + ".*", "i"),
+        Phone: new RegExp(".*" + search.Phone + ".*", "i"),
       });
     }
     let entities = await this._iEntityRepository.FindEntityFilter($or.length > 0 ? { $or } : {});

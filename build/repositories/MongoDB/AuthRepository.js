@@ -15,11 +15,11 @@ class AuthRepository {
         let app;
         try {
             const db = client.db("Xapi_Admin");
-            let collection = db.collection("Lrs_Usuarios");
+            let collection = db.collection("Lrs_Users");
             // Query
             var query = {
-                "NomeUsuario": auth.user,
-                "SenhaUsuario": auth.pass,
+                "User": auth.user,
+                "Pass": auth.pass,
             };
             // Request
             const cursor = await collection.find(query);
@@ -46,7 +46,7 @@ class AuthRepository {
         let app;
         try {
             const db = client.db("Xapi_Admin");
-            let collection = db.collection("Aplicacoes");
+            let collection = db.collection("Applications");
             // Query
             var query = {
                 Token_App: token,
@@ -77,11 +77,11 @@ class AuthRepository {
         let app;
         try {
             const db = client.db("Xapi_Admin");
-            let collection = db.collection("Aplicacoes");
+            let collection = db.collection("Applications");
             // Query
             var query = {
-                "Auth_Usuario.user": auth.user,
-                "Auth_Usuario.pass": auth.pass,
+                "Auth_User.user": auth.user,
+                "Auth_User.pass": auth.pass,
             };
             // Request
             const cursor = await collection.find(query);
@@ -108,11 +108,11 @@ class AuthRepository {
         let app;
         try {
             const db = client.db("Xapi_Admin");
-            let collection = db.collection("App_Usuarios");
+            let collection = db.collection("Applications_Users");
             // Query
             var query = {
-                "Auth_Usuario.user": auth.user,
-                "Auth_Usuario.pass": auth.pass,
+                "Auth_User.user": auth.user,
+                "Auth_User.pass": auth.pass,
             };
             // Request
             const cursor = await collection.find(query);

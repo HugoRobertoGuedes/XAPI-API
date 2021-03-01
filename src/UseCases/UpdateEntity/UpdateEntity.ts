@@ -7,7 +7,7 @@ import { CpfRegex, EmailRegex } from "../../helpers/String";
 export class UpdateEntity {
   constructor(private _EntityRepo: IEntityRepository) {}
 
-  async execulte(data_updt: EntityDto): Promise<Entity> {
+  async execute(data_updt: EntityDto): Promise<Entity> {
     // if exists entity
     if (data_updt._id == null || data_updt._id == "") {
       throw new Error("_id is required");
@@ -24,12 +24,12 @@ export class UpdateEntity {
     let updt_entity: Object[] = [];
 
     // set fields entity updates
-    if (data_updt.Documento != null && data_updt.Documento !== "") {
+    if (data_updt.Document != null && data_updt.Document !== "") {
       // Valid Documento
       if (
-        !CpfRegex.test(data_updt.Documento) ||
-        data_updt.Documento == null ||
-        data_updt.Documento == ""
+        !CpfRegex.test(data_updt.Document) ||
+        data_updt.Document == null ||
+        data_updt.Document == ""
       ) {
         throw new Error("Enter a valid CPF/CNPJ");
       }
@@ -37,60 +37,60 @@ export class UpdateEntity {
       if (
         (
           await this._EntityRepo.FindEntityFilter({
-            Documento: data_updt.Documento,
+            Document: data_updt.Document,
           })
         ).length != 0
       ) {
         throw new Error("A document already exists");
       }
-      updt_entity.push({ $set: { Documento: data_updt.Documento } });
+      updt_entity.push({ $set: { Document: data_updt.Document } });
     }
 
-    if (data_updt.Nome != null && data_updt.Nome !== "") {
+    if (data_updt.Name != null && data_updt.Name !== "") {
       // equal by Nome
-      if (data_updt.Nome == null || data_updt.Nome == "") {
+      if (data_updt.Name == null || data_updt.Name == "") {
         throw new Error("Enter a valid Nome");
       }
       if (
-        (await this._EntityRepo.FindEntityFilter({ Nome: data_updt.Nome }))
+        (await this._EntityRepo.FindEntityFilter({ Name: data_updt.Name }))
           .length != 0
       ) {
         throw new Error("A Nome already exists");
       }
-      updt_entity.push({ $set: { Nome: data_updt.Nome } });
+      updt_entity.push({ $set: { Name: data_updt.Name } });
     }
 
-    if (data_updt.Email != null && data_updt.Email !== "") {
+    if (data_updt.Mail != null && data_updt.Mail !== "") {
       // Valid Email
       if (
-        !EmailRegex.test(data_updt.Email) ||
-        data_updt.Email == null ||
-        data_updt.Email == ""
+        !EmailRegex.test(data_updt.Mail) ||
+        data_updt.Mail == null ||
+        data_updt.Mail == ""
       ) {
         throw new Error("Enter a valid email");
       }
       if (
         (
           await this._EntityRepo.FindEntityFilter({
-            Email: data_updt.Email,
+            Mail: data_updt.Mail,
           })
         ).length != 0
       ) {
-        throw new Error("A Email already exists");
+        throw new Error("A Mail already exists");
       }
-      updt_entity.push({ $set: { Email: data_updt.Email } });
+      updt_entity.push({ $set: { Mail: data_updt.Mail } });
     }
 
-    if (data_updt.Telefone != null && data_updt.Telefone !== "") {
+    if (data_updt.Phone != null && data_updt.Phone !== "") {
       if (
-        data_updt.Telefone.length < 10 ||
-        data_updt.Telefone.length > 11 ||
-        data_updt.Telefone == null ||
-        data_updt.Telefone == ""
+        data_updt.Phone.length < 10 ||
+        data_updt.Phone.length > 11 ||
+        data_updt.Phone == null ||
+        data_updt.Phone == ""
       ) {
         throw new Error("Enter a valid phone");
       }
-      updt_entity.push({ $set: { Telefone: data_updt.Telefone } });
+      updt_entity.push({ $set: { Phone: data_updt.Phone } });
     }
 
     if (data_updt.Status != null) {

@@ -1,5 +1,5 @@
-import { Aplicacao } from "./../../models/Aplicacao";
-import { App_Usuario } from "./../../models/App_Usuario";
+import { Application } from "../../models/Application";
+import { Applications_Users } from "../../models/Applications_Users";
 import { RedisService } from "./../../services/RedisService";
 import { IAuthRepository } from "../../repositories/IAuthRepository";
 import { Auth } from "../../models/Auth";
@@ -18,18 +18,18 @@ export class AutenticationUserApp {
   async execulte(auth: Auth, tokenApp: string, ip: string): Promise<Object> {
     try {
       // Find User App
-      let user_app: App_Usuario = await this._authRepo.FindUserApp({
+      let user_app: Applications_Users = await this._authRepo.FindUserApp({
         user: auth.user,
         pass: encrypt(auth.pass),
       });
 
       // Find App
-      let app: Aplicacao = await this._authRepo.FindAppByToken(tokenApp);
+      let app: Application = await this._authRepo.FindAppByToken(tokenApp);
 
       if (app != null && user_app != null) {
         // App is existis in user
         if (
-          user_app.Aplicacoes_Cadastradas.indexOf(app._id.toHexString()) <= -1
+          user_app.Registered_Applications.indexOf(app._id.toHexString()) <= -1
         ) {
           throw new Error("The user is not registered for this application");
         }
@@ -39,22 +39,22 @@ export class AutenticationUserApp {
             expiresIn: "2h",
           });
           let dbName: string = await this._stateRepo.GetDatabaseNameByEntityId(
-            app.Entidade_Id
+            app.Entity_Id
           );
           await this._redisService.SaveTokenAutenticateUserApp(
             token,
             app,
             dbName,
-            user_app.Auth_Usuario,
+            user_app.Auth_User,
             ip
           );
           return {
-            Nome: user_app.Nome,
-            Documento: user_app.Documento,
-            Email: user_app.Email,
+            Nome: user_app.Name,
+            Documento: user_app.Document,
+            Email: user_app.Mail,
             Aplicacao: {
-              Titulo: app.Titulo,
-              Descricao: app.Descricao,
+              Titulo: app.Title,
+              Descricao: app.Description,
               Status: app.Status,
               Dt_Criacao: app.Dt_Create,
               Token_App: app.Token_App,

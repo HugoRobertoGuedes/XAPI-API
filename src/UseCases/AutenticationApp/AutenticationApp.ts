@@ -1,7 +1,7 @@
 import { RedisService } from "./../../services/RedisService";
 import { IAuthRepository } from "../../repositories/IAuthRepository";
 import { Auth } from "../../models/Auth";
-import { Aplicacao } from "../../models/Aplicacao";
+import { Application } from "../../models/Application";
 import { IStatementRepository } from "../../repositories/IStatementRepository";
 import { encrypt } from "../../helpers/Security";
 
@@ -17,7 +17,7 @@ export class AutenticationApp {
   async execulte(auth: Auth, ip: string): Promise<Object> {
     try {
       // Find App
-      let app: Aplicacao = await this._authRepo.FindAppByAuth({
+      let app: Application = await this._authRepo.FindAppByAuth({
         user: auth.user,
         pass: encrypt(auth.pass)
       });
@@ -27,12 +27,12 @@ export class AutenticationApp {
           expiresIn: "2h",
         });
         let dbName: string = await this._stateRepo.GetDatabaseNameByEntityId(
-          app.Entidade_Id
+          app.Entity_Id
         );
         await this._redisService.SaveTokenAutenticateApp(token, app, dbName, ip);
         return {
-          Titulo: app.Titulo,
-          Descricao: app.Descricao,
+          Titulo: app.Title,
+          Descricao: app.Description,
           Status: app.Status,
           Dt_Criacao: app.Dt_Create,
           Token_App: app.Token_App,

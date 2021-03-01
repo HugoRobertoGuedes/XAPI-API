@@ -12,15 +12,16 @@ class RegistryNewStatementController {
         try {
             const insertedState = await this._registryNewStatement.execulte(state, token);
             return response.status(200).send({
-                Message: "Succes Register Statement",
+                Message: "Success Register Statement",
                 Ok: true,
                 Obj: insertedState,
             });
         }
         catch (err) {
-            console.log(err.message);
-            return response.status(400).send({
-                Error: err.message,
+            return response.status(401).send({
+                Message: err.message,
+                Ok: false,
+                Obj: {},
             });
         }
     }

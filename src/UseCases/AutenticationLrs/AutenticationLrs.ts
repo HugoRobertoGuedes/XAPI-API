@@ -29,9 +29,9 @@ export class AutenticationLrs {
       // is valid
       if (userLrs != null) {
         let _tokenString = (
-          userLrs.NomeCompleto +
-          userLrs.NomeUsuario +
-          userLrs.SenhaUsuario
+          userLrs.FullName +
+          userLrs.User +
+          userLrs.Pass
         )
           .normalize("NFD")
           .replace(/[^a-zA-Zs]/g, "");
@@ -46,11 +46,11 @@ export class AutenticationLrs {
           tokenExpire,
         );
         return {
-          NomeCompleto: userLrs.NomeCompleto,
-          NomeUsuario: userLrs.NomeUsuario,
-          Email: userLrs.Email,
-          Telefone: userLrs.Telefone,
-          Tipo: userLrs.Tipo,
+          NomeCompleto: userLrs.FullName,
+          NomeUsuario: userLrs.User,
+          Email: userLrs.Mail,
+          Telefone: userLrs.Phone,
+          Tipo: userLrs.Type,
           Token: token,
         };
       } else {

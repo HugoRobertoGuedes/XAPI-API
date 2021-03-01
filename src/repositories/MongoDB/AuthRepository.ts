@@ -1,10 +1,10 @@
 import { IAuthRepository } from "../IAuthRepository";
-import { Aplicacao } from "./../../models/Aplicacao";
+import { Application } from "../../models/Application";
 import { Auth } from "./../../models/Auth";
 import { URI } from "./../../helpers/MongoConnection";
-import { App_Usuario } from "../../models/App_Usuario";
-import { ObjectID, MongoClient } from "mongodb";
-import { Lrs_Usuario } from "../../models/Lrs_Usuario";
+import { Applications_Users } from "../../models/Applications_Users";
+import { MongoClient } from "mongodb";
+import { Lrs_User } from "../../models/Lrs_User";
 
 export class AuthRepository implements IAuthRepository {
   constructor() {}
@@ -13,18 +13,18 @@ export class AuthRepository implements IAuthRepository {
    * Find User Lrs
    * @param auth Auth Model
    */
-  async FindUserlrsByAuth(auth: Auth): Promise<Lrs_Usuario> {
+  async FindUserlrsByAuth(auth: Auth): Promise<Lrs_User> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
-    let app: Lrs_Usuario;
+    let app: Lrs_User;
     try {
       const db = client.db("Xapi_Admin");
-      let collection = db.collection("Lrs_Usuarios");
+      let collection = db.collection("Lrs_Users");
 
       // Query
       var query = {
-        "NomeUsuario": auth.user,
-        "SenhaUsuario": auth.pass,
+        "User": auth.user,
+        "Pass": auth.pass,
       };
 
       // Request
@@ -46,13 +46,13 @@ export class AuthRepository implements IAuthRepository {
    *
    * @param token Token App generate to register
    */
-  async FindAppByToken(token: string): Promise<Aplicacao> {
+  async FindAppByToken(token: string): Promise<Application> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
-    let app: Aplicacao;
+    let app: Application;
     try {
       const db = client.db("Xapi_Admin");
-      let collection = db.collection("Aplicacoes");
+      let collection = db.collection("Applications");
 
       // Query
       var query = {
@@ -79,18 +79,18 @@ export class AuthRepository implements IAuthRepository {
    * @param auth Model Auth
    * @param tokenApp Token to App
    */
-  async FindAppByAuth(auth: Auth): Promise<Aplicacao> {
+  async FindAppByAuth(auth: Auth): Promise<Application> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
-    let app: Aplicacao;
+    let app: Application;
     try {
       const db = client.db("Xapi_Admin");
-      let collection = db.collection("Aplicacoes");
+      let collection = db.collection("Applications");
 
       // Query
       var query = {
-        "Auth_Usuario.user": auth.user,
-        "Auth_Usuario.pass": auth.pass,
+        "Auth_User.user": auth.user,
+        "Auth_User.pass": auth.pass,
       };
 
       // Request
@@ -112,18 +112,18 @@ export class AuthRepository implements IAuthRepository {
    * Return App user
    * @param auth Auth Model
    */
-  async FindUserApp(auth: Auth): Promise<App_Usuario> {
+  async FindUserApp(auth: Auth): Promise<Applications_Users> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
-    let app: App_Usuario;
+    let app: Applications_Users;
     try {
       const db = client.db("Xapi_Admin");
-      let collection = db.collection("App_Usuarios");
+      let collection = db.collection("Applications_Users");
 
       // Query
       var query = {
-        "Auth_Usuario.user": auth.user,
-        "Auth_Usuario.pass": auth.pass,
+        "Auth_User.user": auth.user,
+        "Auth_User.pass": auth.pass,
       };
 
       // Request

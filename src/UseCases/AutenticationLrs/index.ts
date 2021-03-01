@@ -3,7 +3,9 @@ import { AuthRepository } from "../../repositories/MongoDB/AuthRepository";
 import { AutenticationLrs } from "./AutenticationLrs";
 import { AutenticationLrsController } from "./AutenticationLrsController";
 
-const redisService = new RedisService();
+import { redisCli } from "../../app";
+
+const redisService = new RedisService(redisCli);
 const mongoAuthRepository = new AuthRepository();
 
 const autenticationLrs = new AutenticationLrs(

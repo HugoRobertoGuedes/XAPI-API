@@ -1,35 +1,30 @@
 import { Auth } from "./../models/Auth";
-import { Aplicacao } from "./../models/Aplicacao";
-
-const Redis = require("ioredis");
-
-const { REDIS_HOST, REDIS_PORT } = require("./../config");
+import { Application } from "../models/Application";
+import { RedisClient } from "redis";
 
 export class RedisService {
   private readonly client;
 
-  constructor() {
-    let port: string = REDIS_PORT
-    let host: string = REDIS_HOST
-    this.client = new Redis(port, host);
+  constructor(redis: RedisClient) {
+    this.client = redis;
   }
 
-  async FlushAll(){
+  async FlushAll() {
     await this.client.flushall();
   }
 
   async SaveTokenAutenticateApp(
     token: string,
-    app: Aplicacao,
+    app: Application,
     dbName: string,
     ip: string
   ): Promise<void> {
     await this.client.hmset(token, {
       tokenApp: app.Token_App,
       rule: "APP",
-      title: app.Titulo,
+      title: app.Title,
       dbName: dbName,
-      ip: ip
+      ip: ip,
     });
     await this.client.expire(token, app.Token_Expire);
   }
@@ -40,20 +35,19 @@ export class RedisService {
     status: boolean
   ): Promise<void> {
     let exists = await this.GetValueToken(ip);
-    let attempsKey: number = +exists['attempts'];
+    let attempsKey: number = +exists["attempts"];
     await this.client.hmset(ip, {
       date: date,
       ip: ip,
       auth: status,
-      attempts: (exists['attempts'] != null) ? attempsKey  + 1  : 1
+      attempts: exists["attempts"] != null ? attempsKey + 1 : 1,
     });
     await this.client.expire(ip, 600);
   }
 
-
   async SaveTokenAutenticateUserApp(
     token: string,
-    app: Aplicacao,
+    app: Application,
     dbName: string,
     auth: Auth,
     ip: string
@@ -61,10 +55,10 @@ export class RedisService {
     await this.client.hmset(token, {
       tokenApp: app.Token_App,
       rule: "USER",
-      title: app.Titulo,
+      title: app.Title,
       dbName: dbName,
       user: auth.user,
-      ip: ip
+      ip: ip,
     });
     await this.client.expire(token, app.Token_Expire);
   }
@@ -78,7 +72,7 @@ export class RedisService {
     await this.client.hmset(token, {
       rule: "LRS",
       user: auth.user,
-      ip: ip
+      ip: ip,
     });
     await this.client.expire(token, expireTime);
   }

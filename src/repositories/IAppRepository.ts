@@ -1,9 +1,10 @@
-import { Aplicacao } from "../models/Aplicacao";
-import { App_Usuario } from "../models/App_Usuario";
+import { Application } from "../models/Application";
+import { Applications_Users } from "../models/Applications_Users";
 
 export interface IAppRepository {
-  RegistryNewApp(app: Aplicacao): Promise<Aplicacao>;
-  SearchApps(filter: Object): Promise<Aplicacao[]>;
-  RegistryNewUserApp(app: App_Usuario): Promise<App_Usuario>;
-  SearchUserApps(filter: Object): Promise<App_Usuario[]>;
+  AppUpdate(_id: string, updt_app: Object[]): Application | PromiseLike<Application>;
+  RegistryNewApp(app: Application): Promise<Application>;
+  SearchApps(filter: Object): Promise<Application[]>;
+  RegistryNewUserApp(app: Applications_Users): Promise<Applications_Users>;
+  SearchUserApps(filter: Object): Promise<Applications_Users[]>;
 }

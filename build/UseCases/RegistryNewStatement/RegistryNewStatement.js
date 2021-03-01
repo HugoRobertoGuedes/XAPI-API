@@ -7,11 +7,8 @@ class RegistryNewStatement {
         this._redisService = _redisService;
     }
     async execulte(state, token) {
-        // Valid Auth
+        // Cache redis
         let _KeyRedis = await this._redisService.GetValueToken(token);
-        if (_KeyRedis == null) {
-            throw new Error("You are not authorized to perform this action");
-        }
         // Valid Statement
         await this.ValidStatement(state);
         // Create Object for registry
@@ -20,7 +17,7 @@ class RegistryNewStatement {
         newStatement["Dt_Create"] = new Date();
         newStatement["App_Id"] = _KeyRedis["tokenApp"];
         // Insert Registry in database
-        const insertedStatement = await this._stateRepository.InserirNovoStatement(_KeyRedis["dbName"], newStatement);
+        const insertedStatement = await this._stateRepository.InsertNewStatement(_KeyRedis["dbName"], newStatement);
         // return
         return insertedStatement;
     }

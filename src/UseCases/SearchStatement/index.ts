@@ -3,12 +3,14 @@ import { StatementRepository } from "./../../repositories/MongoDB/StatementRepos
 import { SearchStatementController } from "./SearchStatementController";
 import { SearchStatement } from "./SearchStatement";
 
-const redisServicenew = new RedisService();
+import { redisCli } from "../../app";
+
+const redisService = new RedisService(redisCli);
 const statementRepository = new StatementRepository();
 
 const searchStatement = new SearchStatement(
   statementRepository,
-  redisServicenew
+  redisService
 );
 const searchStatementController = new SearchStatementController(
   searchStatement

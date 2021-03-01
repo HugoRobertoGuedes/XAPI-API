@@ -1,6 +1,7 @@
 import { RedisService } from "./../services/RedisService";
 import { Request, Response } from "express";
 import { BearerTokenHeader } from "../helpers/String";
+import { redisCli } from "../app";
 const url = require("url");
 const { ROUTE_RULES, MAX_ATTEMPTS } = require("./../config");
 
@@ -14,7 +15,7 @@ const ValidateIpRequestAuth = async (
   next,
   path: string
 ) => {
-  const _redisService = new RedisService();
+  const _redisService = new RedisService(redisCli);
 
   // Get IP
   let ip =
@@ -48,8 +49,16 @@ const ValidateToken = async (
   next,
   path: string
 ) => {
-  const _redisService = new RedisService();
-
+  const _redisService = new RedisService(redisCli);
+  // exists bearer
+  if (req.headers["authorization"] == null) {
+    res
+      .status(401)
+      .send({
+        Message: "Bearer Token is required",
+        auth: false,
+      });
+  }
   // Get bearer token
   var token = BearerTokenHeader(req.headers["authorization"]);
   // Valid Auth

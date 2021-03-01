@@ -8,17 +8,21 @@ class AutenticationUserAppController {
     async handle(request, response) {
         const { user, pass, tokenApp } = request.body;
         try {
-            const result = await this._autenticationUserAppService.execulte({ user, pass }, tokenApp);
+            let ip = request.clientIp ||
+                request.headers["x-forwarded-for"] ||
+                request.connection.remoteAddress;
+            const Obj = await this._autenticationUserAppService.execulte({ user, pass }, tokenApp, ip.toString());
             return response.status(200).send({
                 Ok: true,
                 Message: "Authenticated application valid for 2 hours",
-                result,
+                Obj,
             });
         }
         catch (err) {
-            console.log(err.message);
-            return response.status(400).send({
-                Error: err.message,
+            return response.status(401).send({
+                Message: err.message,
+                Ok: false,
+                Obj: {},
             });
         }
     }

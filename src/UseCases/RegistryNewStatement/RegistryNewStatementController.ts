@@ -1,4 +1,4 @@
-import { StatementDto } from "../../models/DTO/StatementDTO";
+import { StatementDTO } from "../../models/DTO/StatementDTO";
 import { Request, Response } from "express";
 import { BearerTokenHeader } from "../../helpers/String";
 import { RegistryNewStatement } from "./RegistryNewStatement";
@@ -7,7 +7,7 @@ export class RegistryNewStatementController {
   constructor(private _registryNewStatement: RegistryNewStatement) {}
 
   async handler(request: Request, response: Response): Promise<Response> {
-    const state: StatementDto = request.body;
+    const state: StatementDTO = request.body;
     const token = BearerTokenHeader(request.headers["authorization"]);
     try {
       const insertedState = await this._registryNewStatement.execulte(

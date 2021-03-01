@@ -1,40 +1,40 @@
 import { IAppRepository } from "../../repositories/IAppRepository";
-import { App_Usuario } from "../../models/App_Usuario";
-import { App_UsuarioDto } from "../../models/DTO/App_UsuarioDto";
+import { Applications_Users } from "../../models/Applications_Users";
+import { Applications_UsersDTO } from "../../models/DTO/Applications_UsersDTO";
 export class SearchAllUserApps {
   constructor(private _IAppRepo: IAppRepository) {}
 
-  async execute(filter: App_UsuarioDto): Promise<App_Usuario[]> {
+  async execute(filter: Applications_UsersDTO): Promise<Applications_Users[]> {
     let $or: Object[] = [];
-    if (filter.Nome != "" && filter.Nome != null) {
+    if (filter.Name != "" && filter.Name != null) {
       $or.push({
-        Nome:
-          filter.Nome == "" ? "" : new RegExp(".*" + filter.Nome + ".*", "i"),
+        Name:
+          filter.Name == "" ? "" : new RegExp(".*" + filter.Name + ".*", "i"),
       });
     }
-    if (filter.Documento != "" && filter.Documento != null) {
+    if (filter.Document != "" && filter.Document != null) {
       $or.push({
-        Documento:
-          filter.Documento == ""
+        Document:
+          filter.Document == ""
             ? ""
-            : new RegExp(".*" + filter.Documento + ".*", "i"),
+            : new RegExp(".*" + filter.Document + ".*", "i"),
       });
     }
-    if (filter.Email != "" && filter.Email != null) {
+    if (filter.Mail != "" && filter.Mail != null) {
       $or.push({
-        Email:
-          filter.Email == "" ? "" : new RegExp(".*" + filter.Email + ".*", "i"),
+        Mail:
+          filter.Mail == "" ? "" : new RegExp(".*" + filter.Mail + ".*", "i"),
       });
     }
     if (
-      filter.Aplicacoes_Cadastradas != null &&
-      filter.Aplicacoes_Cadastradas.length > 0
+      filter.Registered_Applications != null &&
+      filter.Registered_Applications.length > 0
     ) {
       $or.push({
-        Aplicacoes_Cadastradas:
-          filter.Aplicacoes_Cadastradas.length <= 0
+        Registered_Applications:
+          filter.Registered_Applications.length <= 0
             ? []
-            : filter.Aplicacoes_Cadastradas,
+            : filter.Registered_Applications,
       });
     }
     let users = await this._IAppRepo.SearchUserApps(

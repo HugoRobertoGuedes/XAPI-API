@@ -1,7 +1,7 @@
-import { Lrs_Usuario } from "../models/Lrs_Usuario";
+import { Lrs_User } from "../models/Lrs_User";
 
 export interface ILrsRepository {
-    SaveNewUserLrs(entity: Lrs_Usuario): Promise<Lrs_Usuario>
-    SearchUserLrs(filter: Object): Promise<Lrs_Usuario[]>
-    UpdateUserLrs(id:string,update:Object):Promise<Lrs_Usuario>
+    SaveNewUserLrs(entity: Lrs_User): Promise<Lrs_User>
+    SearchUserLrs(filter: Object): Promise<Lrs_User[]>
+    UpdateUserLrs(id:string,update:Object):Promise<Lrs_User>
 }

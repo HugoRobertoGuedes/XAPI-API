@@ -6,7 +6,7 @@ import { IEntityRepository } from "../IEntityRepository";
 export class EntityRepository implements IEntityRepository {
   constructor() {}
 
-  async EntityUpdate(id: string, filds_up: Object): Promise<Entity> {
+  async EntityUpdate(id: string, fields_up: Object): Promise<Entity> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     let updated: Entity;
@@ -16,10 +16,10 @@ export class EntityRepository implements IEntityRepository {
 
       let cursor = await collection.findOneAndUpdate(
         { _id: new ObjectID(id) },
-        filds_up,
+        fields_up,
         { returnOriginal: false }
       );
-      updated = cursor['value'];
+      updated = cursor["value"];
       return updated;
     } catch (error) {
       throw new Error(error);

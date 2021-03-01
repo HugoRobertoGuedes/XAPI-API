@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 const MongoConnection_1 = require("../../helpers/MongoConnection");
 class StatementRepository {
     constructor() { }
-    async InserirNovoStatement(db, statement) {
+    async InsertNewStatement(db, statement) {
         const client = new MongoClient(MongoConnection_1.URI, { useUnifiedTopology: true });
         await client.connect();
         try {
@@ -21,7 +21,7 @@ class StatementRepository {
             await client.close();
         }
     }
-    async BuscarStatementPorFiltro(db, filter) {
+    async SearchStatement(db, filter) {
         const client = new MongoClient(MongoConnection_1.URI, { useUnifiedTopology: true });
         await client.connect();
         try {
@@ -42,13 +42,13 @@ class StatementRepository {
             await client.close();
         }
     }
-    async BuscarAppPorTokenApp(token) {
+    async SearchAppByTokenApp(token) {
         const client = new MongoClient(MongoConnection_1.URI, { useUnifiedTopology: true });
         await client.connect();
         try {
             let app;
             const database = client.db("Xapi_Admin");
-            let collection = database.collection("Aplicacoes");
+            let collection = database.collection("Applications");
             var query = {
                 Token_App: token,
             };
@@ -65,13 +65,13 @@ class StatementRepository {
             await client.close();
         }
     }
-    async ObterNomeDatabasePorEntidadeId(id) {
+    async GetDatabaseNameByEntityId(id) {
         const client = new MongoClient(MongoConnection_1.URI, { useUnifiedTopology: true });
         await client.connect();
         try {
             let db;
             const database = client.db("Xapi_Admin");
-            let collection = database.collection("Entidades");
+            let collection = database.collection("Entities");
             let query = {
                 _id: id,
             };

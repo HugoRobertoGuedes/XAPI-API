@@ -14,4 +14,6 @@ function encrypt(senha) {
   return hash;
 }
 
+
+
 export { encrypt };

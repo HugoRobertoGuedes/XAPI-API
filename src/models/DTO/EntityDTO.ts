@@ -1,8 +1,8 @@
 export interface EntityDto {
-  Nome: string;
-  Email: string;
-  Telefone: string;
-  Documento: string;
   _id: string;
+  Name: string;
+  Mail: string;
+  Phone: string;
+  Document: string;
   Status: boolean;
 }

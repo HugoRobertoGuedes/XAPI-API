@@ -1,4 +1,4 @@
-import { Lrs_Usuario } from "./../../models/Lrs_Usuario";
+import { Lrs_User } from "../../models/Lrs_User";
 import { URI } from "./../../helpers/MongoConnection";
 import { MongoClient } from "mongodb";
 import { ILrsRepository } from "../ILrsRepository";
@@ -7,14 +7,14 @@ import { ObjectId } from "mongodb";
 export class LrsRepository implements ILrsRepository {
   constructor() {}
 
-  async UpdateUserLrs(id:string,update: Object): Promise<Lrs_Usuario> {
+  async UpdateUserLrs(id:string,update: Object): Promise<Lrs_User> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
       const database = client.db("Xapi_Admin");
-      var collection = database.collection("Lrs_Usuarios");
+      var collection = database.collection("Lrs_Users");
       const result = await collection.findOneAndUpdate({_id:new ObjectId(id)},update,{returnOriginal:false});
-      let obj: Lrs_Usuario = result.value;
+      let obj: Lrs_User = result.value;
       return obj;
     } catch (error) {
       console.error(error);
@@ -23,14 +23,14 @@ export class LrsRepository implements ILrsRepository {
     }
   }
 
-  async SaveNewUserLrs(userlrs: Lrs_Usuario): Promise<Lrs_Usuario> {
+  async SaveNewUserLrs(userlrs: Lrs_User): Promise<Lrs_User> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
     try {
       const database = client.db("Xapi_Admin");
-      var collection = database.collection("Lrs_Usuarios");
+      var collection = database.collection("Lrs_Users");
       const result = await collection.insertOne(userlrs);
-      let obj: Lrs_Usuario = result.ops[0];
+      let obj: Lrs_User = result.ops[0];
       return obj;
     } catch (error) {
       console.error(error);
@@ -39,13 +39,13 @@ export class LrsRepository implements ILrsRepository {
     }
   }
 
-  async SearchUserLrs(filter: Object): Promise<Lrs_Usuario[]> {
+  async SearchUserLrs(filter: Object): Promise<Lrs_User[]> {
     const client = new MongoClient(URI, { useUnifiedTopology: true });
     await client.connect();
-    let users: Lrs_Usuario[] = [];
+    let users: Lrs_User[] = [];
     try {
       const database = client.db("Xapi_Admin");
-      var collection = database.collection("Lrs_Usuarios");
+      var collection = database.collection("Lrs_Users");
       let query = filter;
       const result = await collection.find(query);
       await result.forEach((el) => {

@@ -1,25 +1,32 @@
 import { ObjectID } from "mongodb";
-import { AplicacaoDto } from "../../models/DTO/AplicacaoDto";
+import { ApplicationDTO } from "../../models/DTO/ApplicationDTO";
 import { IAppRepository } from "./../../repositories/IAppRepository";
-import { Aplicacao } from "./../../models/Aplicacao";
-import { app } from "../../app";
+import { Application } from "../../models/Application";
 
 export class SearchApp {
   constructor(private _iAppRepo: IAppRepository) {}
-  async execute(filter: AplicacaoDto): Promise<Aplicacao[]> {
+  async execute(filter: ApplicationDTO): Promise<Application[]> {
     let $or: Object[] = [];
-    if (filter.Titulo != "" && filter.Titulo!= undefined && filter.Titulo!= null) {
+    if (
+      filter.Title != "" &&
+      filter.Title != undefined &&
+      filter.Title != null
+    ) {
       $or.push({
-        Titulo:
-          filter.Titulo == ""
+        Title:
+          filter.Title == ""
             ? ""
-            : new RegExp(".*" + filter.Titulo + ".*", "i"),
+            : new RegExp(".*" + filter.Title + ".*", "i"),
       });
     }
-    if (filter.Entidade_Id != "" && filter.Entidade_Id!= undefined  && filter.Entidade_Id!= null) {
+    if (
+      filter.Entity_Id != "" &&
+      filter.Entity_Id != undefined &&
+      filter.Entity_Id != null
+    ) {
       $or.push({
-        Entidade_Id:
-          filter.Entidade_Id == "" ? "" : new ObjectID(filter.Entidade_Id),
+        Entity_Id:
+          filter.Entity_Id == "" ? "" : new ObjectID(filter.Entity_Id),
       });
     }
     let apps = await this._iAppRepo.SearchApps($or.length > 0 ? { $or } : {});

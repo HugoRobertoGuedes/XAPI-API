@@ -3,8 +3,10 @@ import { StatementRepository } from "./../../repositories/MongoDB/StatementRepos
 import { RegistryNewStatementController } from "./RegistryNewStatementController";
 import { RegistryNewStatement } from "./RegistryNewStatement";
 
+import { redisCli } from "../../app";
+
+const redisService = new RedisService(redisCli);
 const statementRepository = new StatementRepository();
-const redisService = new RedisService();
 
 const registryNewStatement = new RegistryNewStatement(
   statementRepository,

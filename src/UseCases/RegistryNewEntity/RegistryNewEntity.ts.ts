@@ -11,16 +11,16 @@ export class RegistryNewEntity {
     await this.IsValid(data);
     // Generate Entity Model
     let entity: Entity = {
-      Nome: data.Nome,
-      Email: data.Email,
-      Telefone: data.Telefone,
-      Documento: data.Documento,
+      Name: data.Name,
+      Mail: data.Mail,
+      Phone: data.Phone,
+      Document: data.Document,
       Dt_Create: new Date(),
       Dt_Att: new Date(),
       Status: true,
       Db_Name:
         "Xapi_Db_" +
-        data.Nome.toLowerCase()
+        data.Name.toLowerCase()
           .normalize("NFD")
           .replace(/[^a-zA-Zs]/g, ""),
     };
@@ -33,51 +33,56 @@ export class RegistryNewEntity {
   async IsValid(entity: EntityDto): Promise<void> {
     // Valid Email
     if (
-      !EmailRegex.test(entity.Email) ||
-      entity.Email == null ||
-      entity.Email == ""
+      !EmailRegex.test(entity.Mail) ||
+      entity.Mail == null ||
+      entity.Mail == ""
     ) {
       throw new Error("Enter a valid email");
     }
     // // Valid Documento
     if (
-      !CpfRegex.test(entity.Documento) ||
-      entity.Documento == null ||
-      entity.Documento == ""
+      !CpfRegex.test(entity.Document) ||
+      entity.Document == null ||
+      entity.Document == ""
     ) {
       throw new Error("Enter a valid CPF/CNPJ");
     }
     // // Valid Phone
     if (
-      entity.Telefone.length < 10 ||
-      entity.Telefone.length > 11 ||
-      entity.Telefone == null ||
-      entity.Telefone == ""
+      entity.Phone.length < 10 ||
+      entity.Phone.length > 11 ||
+      entity.Phone == null ||
+      entity.Phone == ""
     ) {
       throw new Error("Enter a valid phone");
     }
     // // equal by CPF
     if (
-      (await this._EntityRepo.FindEntityFilter({
-        "Documento": entity.Documento,
-      })).length !=0
+      (
+        await this._EntityRepo.FindEntityFilter({
+          Document: entity.Document,
+        })
+      ).length != 0
     ) {
       throw new Error("A document already exists");
     }
     // // equal by Email
     if (
-      (await this._EntityRepo.FindEntityFilter({
-        Email: entity.Email,
-      })).length !=0
+      (
+        await this._EntityRepo.FindEntityFilter({
+          Mail: entity.Mail,
+        })
+      ).length != 0
     ) {
       throw new Error("A Email already exists");
     }
     // // equal by Nome
-    if (entity.Nome == null || entity.Nome == "") {
+    if (entity.Name == null || entity.Name == "") {
       throw new Error("Enter a valid Nome");
     }
     if (
-      (await this._EntityRepo.FindEntityFilter({ Nome: entity.Nome })).length !=0
+      (await this._EntityRepo.FindEntityFilter({ Name: entity.Name })).length !=
+      0
     ) {
       throw new Error("A Nome already exists");
     }
